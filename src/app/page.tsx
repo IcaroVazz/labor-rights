@@ -58,7 +58,7 @@ export default function Home() {
             Calculadora <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Rescisão CLT</span>
           </h1>
           <p className="text-lg text-slate-600 max-w-lg mx-auto">
-            Simule seus direitos trabalhistas de forma rápida, segura e atualizada com as leis de 2024.
+            Simule seus direitos trabalhistas de forma rápida, segura e atualizada de acordo com as leis.
           </p>
         </header>
 
