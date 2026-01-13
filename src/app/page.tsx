@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { calculateRescisao, CalculationResult } from '../utils/clt-logic';
 import AdUnit from '../components/AdUnit';
-import { Printer, BookOpen, Calculator, DollarSign, Calendar, Briefcase, ArrowRight, CheckCircle2 } from 'lucide-react';
+import Link from 'next/link';
+import { Printer, BookOpen, Calculator, DollarSign, Calendar, Briefcase, ArrowRight, CheckCircle2, HelpCircle, FileText, AlertTriangle } from 'lucide-react';
 
 export default function Home() {
   const [salary, setSalary] = useState('');
@@ -27,9 +28,9 @@ export default function Home() {
       );
       setResult(res);
       setLoading(false);
-      
+
       setTimeout(() => {
-          document.getElementById('resultado')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('resultado')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }, 600);
   };
@@ -41,31 +42,31 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 font-sans selection:bg-indigo-500 selection:text-white">
-      
+    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 font-sans selection:bg-indigo-500 selection:text-white pb-32">
+
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-purple-200/30 blur-[100px]" />
         <div className="absolute top-[10%] -right-[10%] w-[40%] h-[60%] rounded-full bg-blue-200/30 blur-[100px]" />
       </div>
 
-      <div className="max-w-3xl mx-auto">
-        
+      <div className="max-w-4xl mx-auto">
+
         <header className="text-center mb-10 animate-slide-up">
           <div className="inline-flex items-center justify-center p-3 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-200 mb-4">
             <Calculator className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-2">
-            Calculadora <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Rescisão CLT</span>
+            Calculadora <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Rescisão CLT 2026</span>
           </h1>
           <p className="text-lg text-slate-600 max-w-lg mx-auto">
-            Simule seus direitos trabalhistas de forma rápida, segura e atualizada de acordo com as leis.
+            Simule seus direitos trabalhistas exatos: Férias, 13º, Aviso Prévio e Multa do FGTS.
           </p>
         </header>
 
-        <div className="glass-card rounded-3xl p-6 sm:p-10 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          
+        <div className="glass-card bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl rounded-3xl p-6 sm:p-10 animate-slide-up mb-12">
+
           <form onSubmit={handleCalculate} className="space-y-6">
-            
+
             <div className="relative group">
               <label className="block text-sm font-semibold text-slate-700 mb-2 pl-1">Salário Bruto</label>
               <div className="relative">
@@ -76,7 +77,7 @@ export default function Home() {
                   type="number"
                   step="0.01"
                   required
-                  placeholder="0,00"
+                  placeholder="Ex: 2500,00"
                   className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-200 rounded-xl focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all outline-none text-lg font-medium text-slate-900 placeholder:text-slate-300"
                   value={salary}
                   onChange={(e) => setSalary(e.target.value)}
@@ -86,7 +87,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2 pl-1">Admissão</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-2 pl-1">Data de Admissão</label>
                 <div className="relative">
                   <Calendar className="absolute top-1/2 -translate-y-1/2 left-4 text-slate-400 w-5 h-5" />
                   <input
@@ -99,7 +100,7 @@ export default function Home() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2 pl-1">Afastamento</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-2 pl-1">Data de Saída</label>
                 <div className="relative">
                   <Calendar className="absolute top-1/2 -translate-y-1/2 left-4 text-slate-400 w-5 h-5" />
                   <input
@@ -118,16 +119,16 @@ export default function Home() {
               <div className="relative">
                 <Briefcase className="absolute top-1/2 -translate-y-1/2 left-4 text-slate-400 w-5 h-5" />
                 <select
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-200 rounded-xl focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all outline-none text-slate-900 appearance-none"
+                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-200 rounded-xl focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all outline-none text-slate-900 appearance-none cursor-pointer"
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                 >
-                  <option value="sem_justa_causa">Demissão sem Justa Causa</option>
-                  <option value="pedido_demissao">Pedido de Demissão</option>
+                  <option value="sem_justa_causa">Demissão sem Justa Causa (Pelo Empregador)</option>
+                  <option value="pedido_demissao">Pedido de Demissão (Pelo Funcionário)</option>
                   <option value="justa_causa">Demissão por Justa Causa</option>
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
                 </div>
               </div>
             </div>
@@ -151,9 +152,9 @@ export default function Home() {
         </div>
 
         {result && (
-          <div id="resultado" className="mt-8 animate-slide-up">
+          <div id="resultado" className="mt-8 mb-16 animate-slide-up">
             <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
-              
+
               <div className="bg-slate-900 p-6 sm:p-8 text-white relative overflow-hidden">
                 <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
@@ -173,43 +174,109 @@ export default function Home() {
                 <h3 className="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
                   <DollarSign className="w-5 h-5 text-indigo-600" /> Detalhamento das Verbas
                 </h3>
-                
+
                 <div className="space-y-3">
                   <ResultRow label="Saldo de Salário" value={result.saldoSalario} />
-                  <ResultRow label="Aviso Prévio Indenizado" value={result.avisoPrevio} highlight={result.avisoPrevio > 0} />
-                  <ResultRow label="Férias Vencidas + Proporcionais" value={result.feriasVencidas + result.feriasProporcionais} />
+                  <ResultRow label="Aviso Prévio" value={result.avisoPrevio} highlight={result.avisoPrevio > 0} />
+                  <ResultRow label="Férias Vencidas + Prop." value={result.feriasVencidas + result.feriasProporcionais} />
                   <ResultRow label="1/3 de Férias" value={result.tercoFerias} />
                   <ResultRow label="13º Salário Proporcional" value={result.decimoTerceiro} />
                   <ResultRow label="Multa FGTS (40%)" value={result.multaFGTS} highlight={result.multaFGTS > 0} isLast />
                 </div>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-3 no-print">
-                  <button 
+                  <button
                     onClick={handlePrint}
                     className="flex-1 flex items-center justify-center gap-2 bg-slate-100 text-slate-700 font-semibold py-3.5 rounded-xl hover:bg-slate-200 transition border border-slate-200"
                   >
-                    <Printer size={18} /> Imprimir / Salvar PDF
+                    <Printer size={18} /> Imprimir / PDF
                   </button>
-                  <a 
-                    href="https://www.gov.br/trabalho-e-emprego/pt-br" 
-                    target="_blank" 
+                  <a
+                    href="https://www.gov.br/trabalho-e-emprego/pt-br"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 flex items-center justify-center gap-2 bg-indigo-50 text-indigo-700 font-semibold py-3.5 rounded-xl hover:bg-indigo-100 transition border border-indigo-100"
                   >
                     <BookOpen size={18} /> Lei na Íntegra
                   </a>
                 </div>
+
+                <div className="mt-4 p-4 bg-yellow-50 border border-yellow-100 rounded-xl flex gap-3 text-sm text-yellow-800">
+                  <AlertTriangle className="w-5 h-5 shrink-0" />
+                  <p>Este cálculo é uma estimativa baseada nas regras gerais da CLT. Valores exatos podem variar dependendo de convenções coletivas e descontos (INSS, IRRF).</p>
+                </div>
               </div>
             </div>
 
-             <div className="mt-8">
-                <AdUnit slot="0987654321" />
+            <div className="mt-8">
+              <AdUnit slot="0987654321" />
             </div>
           </div>
         )}
 
-        <footer className="mt-12 text-center text-slate-400 text-sm pb-8">
-          <p>© 2026 Simulador CLT. Feito para ajudar trabalhadores.</p>
+        <section className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-slate-200 mt-12 prose prose-slate max-w-none">
+          <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+            <HelpCircle className="text-indigo-600" />
+            Entenda seus Direitos Trabalhistas
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+                <FileText className="w-5 h-5 text-purple-600" /> O que é o Aviso Prévio?
+              </h3>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O aviso prévio é a comunicação da rescisão do contrato de trabalho por uma das partes (empregador ou empregado).
+                Na demissão sem justa causa, a empresa deve avisar o trabalhador com 30 dias de antecedência ou pagar esses dias (aviso indenizado).
+                Além disso, a cada ano trabalhado, acrescentam-se 3 dias ao aviso, até o limite de 90 dias.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
+                <FileText className="w-5 h-5 text-purple-600" /> Como funciona o 13º Salário?
+              </h3>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                O 13º salário proporcional é calculado dividindo-se o salário mensal por 12 e multiplicando pelo número de meses trabalhados no ano.
+                Considera-se "mês trabalhado" a fração igual ou superior a 15 dias de trabalho dentro do mês civil.
+              </p>
+            </div>
+          </div>
+
+          <hr className="my-8 border-slate-200" />
+
+          <h3 className="text-xl font-bold text-slate-800 mb-4">Tipos de Rescisão Explicados</h3>
+          <ul className="space-y-4">
+            <li className="flex gap-4">
+              <div className="w-2 h-2 mt-2.5 bg-indigo-500 rounded-full shrink-0" />
+              <div>
+                <strong className="text-slate-900 block">Demissão sem Justa Causa</strong>
+                <span className="text-slate-600">Ocorre quando a empresa decide desligar o funcionário sem motivo grave. O trabalhador recebe todos os direitos, incluindo saque do FGTS e multa de 40%.</span>
+              </div>
+            </li>
+            <li className="flex gap-4">
+              <div className="w-2 h-2 mt-2.5 bg-indigo-500 rounded-full shrink-0" />
+              <div>
+                <strong className="text-slate-900 block">Pedido de Demissão</strong>
+                <span className="text-slate-600">Quando o funcionário decide sair. Não há direito ao saque do FGTS nem à multa de 40%, e o aviso prévio deve ser cumprido ou descontado.</span>
+              </div>
+            </li>
+            <li className="flex gap-4">
+              <div className="w-2 h-2 mt-2.5 bg-indigo-500 rounded-full shrink-0" />
+              <div>
+                <strong className="text-slate-900 block">Demissão por Justa Causa</strong>
+                <span className="text-slate-600">Ocorre por falta grave prevista no artigo 482 da CLT. O trabalhador perde quase todos os direitos, recebendo apenas saldo de salário e férias vencidas.</span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <footer className="mt-16 text-center border-t border-slate-200 pt-8 pb-8">
+          <div className="flex justify-center gap-6 mb-4 text-sm font-medium text-slate-600">
+            <Link href="/politica-privacidade" className="hover:text-indigo-600 transition">Política de Privacidade</Link>
+            <Link href="/termos-de-uso" className="hover:text-indigo-600 transition">Termos de Uso</Link>
+          </div>
+          <p className="text-slate-400 text-sm">© 2026 Simulador Rescisão CLT. Todos os direitos reservados.</p>
         </footer>
       </div>
     </main>
